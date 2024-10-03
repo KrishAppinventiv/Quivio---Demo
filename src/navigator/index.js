@@ -22,7 +22,7 @@ const Stack = createNativeStackNavigator();
 const RootNavigator = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator >
+      <Stack.Navigator>
         <Stack.Screen
           component={SplashScreen}
           name={ScreenNames.Splash}

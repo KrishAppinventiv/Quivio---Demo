@@ -226,7 +226,7 @@ const ResetPassword = () => {
                 error={passwordError}
                 icon={Images.pass}
                 type="password"
-                
+                sideImg ={Images.eye}
               />
 
               {(isPasswordFocused || hasPasswordInput) &&
@@ -267,6 +267,7 @@ const ResetPassword = () => {
                 error={confirmPasswordError}
                 icon={Images.pass}
                 type="password"
+                
               />
               {confirmPasswordError && (
                 <Text style={styles.errorText}>{confirmPasswordError}</Text>

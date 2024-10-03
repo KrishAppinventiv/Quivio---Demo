@@ -12,7 +12,8 @@ const ScreenNames = {
     MENU : 'Menu',
     AddPhone : 'AddPhone',
     VerifyOtp : 'VerifyOtp',
-    Tutorial : 'Tutorial'
+    Tutorial : 'Tutorial',
+    Profile : 'Profile'
   };
   
   export {ScreenNames};

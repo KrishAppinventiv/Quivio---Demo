@@ -62,7 +62,7 @@ export default StyleSheet.create({
       },
     
       ccpContain: {
-        height: 40,
+        height: 50,
         width: 50,
         borderRadius: 7,
         borderColor:'#E5E8EA',
@@ -73,15 +73,16 @@ export default StyleSheet.create({
         justifyContent: 'center',
         alignSelf: 'center',
         marginRight: 10,
+        
       },
       textInput: {
-        height: 60,
+        // height: 60,
         flexDirection: 'row',
         justifyContent: 'center',
         marginTop: 30,
         backgroundColor: 'white',
         alignItems: 'center',
-        marginHorizontal: 30,
+        marginHorizontal: 10,
         borderRadius: 8,
       },
       input: {
@@ -140,7 +141,7 @@ export default StyleSheet.create({
       },
       modalContainer: {
         width: "80%",
-        height:"31%",
+        
         padding: 20,
         backgroundColor: 'white',
         borderRadius: 10,
@@ -153,35 +154,36 @@ export default StyleSheet.create({
         fontWeight:'700',
         lineHeight:26
       },
-      modalText: {
-        marginHorizontal:35,
-        fontSize: 13,
-        marginBottom: 20,
-        fontWeight:'300',
-        alignSelf:'center',
-        justifyContent:'center',
-        color:'#4D5876',
-        lineHeight:19.5
-      },
+      // modalText: {
+      //   marginHorizontal:35,
+      //   fontSize: 13,
+      //   marginBottom: 20,
+      //   fontWeight:'300',
+      //   alignSelf:'center',
+      //   justifyContent:'center',
+      //   color:'#4D5876',
+      //   lineHeight:19.5
+      // },
       modalText1: {
         marginHorizontal:35,
         fontSize: 13,
-       
+        textAlign:'center',
         fontWeight:'300',
         alignSelf:'center',
         justifyContent:'center',
         color:'#4D5876',
-        lineHeight:19.5
+        lineHeight:19.5,
+        marginBottom: 20,
       },
       modalButton: {
-        paddingVertical: 10,
+        padding: 10,
         
         justifyContent:'center',
         alignItems:'center',
         backgroundColor: '#2A7BBB',
         borderRadius: 5,
-        height:51,
-        width:'40%'
+        
+       
       },
       modalButtonText: {
         color: 'white',

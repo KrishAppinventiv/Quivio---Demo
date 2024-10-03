@@ -61,8 +61,8 @@ const BottomTabNavigator = () => {
         }}
       />
       <Tab.Screen
-        component={Menu}
-        name={ScreenNames.MENU}
+        component={Profile}
+        name={ScreenNames.Profile}
         options={{
           headerShown: false,
           tabBarIcon: () => {

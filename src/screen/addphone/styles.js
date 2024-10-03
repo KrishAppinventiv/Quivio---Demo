@@ -106,7 +106,7 @@ export default StyleSheet.create({
       },
       modalContainer: {
         marginHorizontal:34,
-        height: '31%',
+      
         padding: 20,
         backgroundColor: 'white',
         borderRadius: 10,
@@ -120,14 +120,15 @@ export default StyleSheet.create({
         lineHeight: 26,
       },
       modalText: {
-        marginHorizontal:40,
+        marginHorizontal:35,
         fontSize: 13,
+        textAlign:'center',
+        fontWeight:'300',
+        alignSelf:'center',
+        justifyContent:'center',
+        color:'#4D5876',
+        lineHeight:19.5,
         marginBottom: 20,
-        fontWeight: '300',
-        alignSelf: 'center',
-        justifyContent: 'center',
-        color: '#4D5876',
-        lineHeight: 19.5,
       },
       modalButton: {
         paddingVertical: 10,

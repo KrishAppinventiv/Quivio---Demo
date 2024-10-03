@@ -8,10 +8,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SplashScreen = () => {
   const [fadeAnim] = useState(new Animated.Value(0));
-  const navigation: any = useNavigation();
+  const navigation = useNavigation();
 
- 
-  
   useEffect(() => {
     const checkStatus = async () => {
       try {
@@ -19,24 +17,23 @@ const SplashScreen = () => {
         const isLoggedIn = await AsyncStorage.getItem('isLoggedIn');
 
         setTimeout(() => {
-       
           if (tutorialSeen === 'true') {
             if (isLoggedIn === 'true') {
               navigation.reset({
-                index: 0, 
-                routes: [{ name: ScreenNames.BottomTab }], 
-            });
+                index: 0,
+                routes: [{name: ScreenNames.BottomTab}],
+              });
             } else {
               navigation.reset({
-                index: 0, 
-                routes: [{ name: ScreenNames.Sign }], 
-            });
+                index: 0,
+                routes: [{name: ScreenNames.Sign}],
+              });
             }
           } else {
             navigation.reset({
-              index: 0, 
-              routes: [{ name: ScreenNames.Tutorial }], 
-          });
+              index: 0,
+              routes: [{name: ScreenNames.Tutorial}],
+            });
           }
         }, 3000);
       } catch (error) {
@@ -47,15 +44,13 @@ const SplashScreen = () => {
     checkStatus();
   }, [navigation]);
 
-  
   return (
-   
     <View style={styles.container}>
       <Image
-      resizeMethod="resize"
-         style={styles.imageStyle}
-       source={Images.quivio_img}
-  />
+        resizeMethod="resize"
+        style={styles.imageStyle}
+        source={Images.quivio_img}
+      />
     </View>
   );
 };

@@ -1,5 +1,7 @@
 import {StyleSheet, Dimensions} from 'react-native';
 import {colors} from '../../theme';
+import {CustomFont} from '../../Fonts';
+import {fontFamily} from '../../assets';
 
 const SCREEN_HEIGHT = Dimensions.get('screen').height;
 export default StyleSheet.create({
@@ -17,6 +19,7 @@ export default StyleSheet.create({
     fontSize: 28,
     color: 'white',
     fontWeight: '800',
+    fontFamily: fontFamily.SEMI_BOLD,
   },
   textContain: {
     marginTop: SCREEN_HEIGHT * 0.031,
@@ -39,8 +42,7 @@ export default StyleSheet.create({
     backgroundColor: colors.bg,
   },
   upper: {
-    height: SCREEN_HEIGHT*0.455,
-  
+    height: SCREEN_HEIGHT * 0.455,
   },
 
   img: {
@@ -232,25 +234,17 @@ export default StyleSheet.create({
     fontWeight: '700',
     lineHeight: 26,
   },
-  modalText: {
-    width: '78%',
-    fontSize: 13,
-    marginBottom: 20,
-    fontWeight: '400',
-    alignSelf: 'center',
-    justifyContent: 'center',
-    color: '#4D5876',
-    lineHeight: 19.5,
-  },
-  modalText1: {
-    width: '78%',
-    fontSize: 13,
 
-    fontWeight: '400',
+  modalText1: {
+    marginHorizontal: 35,
+    fontSize: 13,
+    textAlign: 'center',
+    fontWeight: '300',
     alignSelf: 'center',
     justifyContent: 'center',
     color: '#4D5876',
     lineHeight: 19.5,
+    marginBottom: 20,
   },
   modalButton: {
     paddingVertical: 10,
@@ -275,4 +269,5 @@ export default StyleSheet.create({
     height: 60,
     padding: 15,
   },
+  buttonText: {color: 'black'},
 });

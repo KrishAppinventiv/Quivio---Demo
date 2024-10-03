@@ -1,4 +1,6 @@
 
+import {fontFamily} from './fonts'
+
   const Images = {
     splash_img: require('./icons/splash_img.png'),
     quivio_img: require('./icons/Quivio.png'),
@@ -43,6 +45,15 @@
     logouted:  require('./icons/logouted.png'),
     slide : require('./icons/slide.png'),
     illustration : require('./icons/lustration.png'),
+    profile : require('./icons/profile.png'),
+    avatar :require('./icons/avatar.png'),
+    camera : require('./icons/camera.png'),
+    gallery : require('./icons/gallery.png'),
+    arrows : require('./icons/arrows.png'),
+    calendar : require('./icons/calendar.png'),
+    downarrow : require('./icons/downarrow.png'),
+    male : require('./icons/male.png'),
+    female : require('./icons/female.png'),
   };
   
-  export {Images};
+  export {Images,fontFamily};

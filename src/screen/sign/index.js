@@ -14,7 +14,7 @@ import {
   KeyboardAvoidingView,
   Dimensions,
   Platform,
-  Keyboard
+  Keyboard,
 } from 'react-native';
 import React, {useState, useEffect, useRef} from 'react';
 import styles from './styles';
@@ -28,12 +28,15 @@ import {useNavigation} from '@react-navigation/native';
 import {ScreenNames} from '../../navigator/screenNames';
 import CustomButton from '../../component/CustomButton';
 import CustomTextInput from '../../component/CustomTextInput';
+
 import Toast from 'react-native-toast-message';
 import CustomToast from '../../component/CustomToast';
-import {SafeAreaView} from 'react-native-safe-area-context';
+
+import CustomModal from '../../component/CustomModal';
 const {height: screenHeight} = Dimensions.get('window');
 const headerHeight = screenHeight * 0.25;
 
+const screenHeight1 = screenHeight * 0.38;
 const Sign = () => {
   const navigation = useNavigation();
   const [Email, SetEmail] = useState('');
@@ -44,8 +47,6 @@ const Sign = () => {
   const [modalVisible, setmodalVisible] = useState(false);
   const [count, Setcount] = useState(0);
   const keyboardHeight = useRef(new Animated.Value(0)).current;
-
- 
 
   const data = [
     {
@@ -63,21 +64,28 @@ const Sign = () => {
   ];
 
   useEffect(() => {
-    const keyboardDidShowListener = Keyboard.addListener('keyboardDidShow', (event) => {
-      Animated.timing(keyboardHeight, {
-        toValue: event.endCoordinates.height,
-        duration: 300,
-        useNativeDriver: false,
-      }).start();
-    });
+    const keyboardDidShowListener = Keyboard.addListener(
+      'keyboardDidShow',
+      event => {
+        Animated.timing(keyboardHeight, {
+          toValue: screenHeight1,
+          // toValue: event.endCoordinates.height,
+          duration: 300,
+          useNativeDriver: false,
+        }).start();
+      },
+    );
 
-    const keyboardDidHideListener = Keyboard.addListener('keyboardDidHide', () => {
-      Animated.timing(keyboardHeight, {
-        toValue: 0,
-        duration: 300,
-        useNativeDriver: false,
-      }).start();
-    });
+    const keyboardDidHideListener = Keyboard.addListener(
+      'keyboardDidHide',
+      () => {
+        Animated.timing(keyboardHeight, {
+          toValue: 0,
+          duration: 300,
+          useNativeDriver: false,
+        }).start();
+      },
+    );
 
     return () => {
       keyboardDidHideListener.remove();
@@ -130,16 +138,9 @@ const Sign = () => {
     setShowPassword(!showPassword);
   };
 
-  // const handleSubmitEditing = field => {
-  //   if (field === 'email') {
-  //     const isEmailValid = validateEmail(Email);
-  //     if (isEmailValid) {
-  //       passwordInput.focus();
-  //     }
-  //   } else if (field === 'password') {
-  //     validatePassword(Password);
-  //   }
-  // };
+  const modalFalse = () => {
+    setmodalVisible(false);
+  };
 
   const handleSubmit = async () => {
     const isEmailValid = validateEmail(Email);
@@ -177,129 +178,104 @@ const Sign = () => {
   };
   return (
     <ScrollView style={styles.container}>
-     
-        <ImageBackground source={Images.Imgbg} style={styles.upper}>
-          <Image source={Images.q_img} style={styles.Qp} />
+      <ImageBackground source={Images.Imgbg} style={styles.upper}>
+        <Image source={Images.q_img} style={styles.Qp} />
 
-          <View style={styles.textContain}>
-            <Text style={styles.qvText}>QUIVIO</Text>
-            <Text style={styles.PersonalText}>
-              Your Personal CarWash Assistant
-            </Text>
-          </View>
+        <View style={styles.textContain}>
+          <Text style={styles.qvText}>QUIVIO</Text>
+          <Text style={styles.PersonalText}>
+            Your Personal CarWash Assistant
+          </Text>
+        </View>
 
-          <FlatList
-            data={data}
-            renderItem={renderItem}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            keyExtractor={(item, index) => index.toString()}
-          />
-        </ImageBackground>
-    
+        <FlatList
+          data={data}
+          renderItem={renderItem}
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          keyExtractor={(item, index) => index.toString()}
+        />
+      </ImageBackground>
+
       {/* <KeyboardAvoidingView
         behavior={Platform.OS === 'ios' ? 'position' : 'height'}
         keyboardVerticalOffset={screenHeight*0.002}
         style={{flex: 1}}> */}
-        {/* <View style={{backgroundColor: colors.bg}}> */}
-        <Animated.View
+      {/* <View style={{backgroundColor: colors.bg}}> */}
+      <Animated.View
         style={{
-          transform: [{ translateY: keyboardHeight.interpolate({
-              inputRange: [0, 300], // You can adjust based on your keyboard height
-              outputRange: [0, -300], // Adjust accordingly
-              extrapolate: 'clamp',
-            })}],
+          transform: [
+            {
+              translateY: keyboardHeight.interpolate({
+                inputRange: [0, 430],
+                outputRange: [0, -300],
+                extrapolate: 'clamp',
+              }),
+            },
+          ],
           backgroundColor: colors.bg,
-        }}
-      >
-          <View style={styles.textContain1}>
-            <Text style={styles.signText}>Sign In</Text>
+        }}>
+        <View style={styles.textContain1}>
+          <Text style={styles.signText}>Sign In</Text>
 
-            <Text style={styles.greyText}>with your valid credentials</Text>
-          </View>
+          <Text style={styles.greyText}>with your valid credentials</Text>
+        </View>
 
-          <View style={styles.textInputContain}>
-            <CustomTextInput
-              placeholder="Email Password"
-              value={Email}
-              onChangeText={text => handleTextChange(text, 'email')}
-              error={emailError}
-              icon={Images.mail}
-              type="email"
-              
-            />
-            {emailError && <Text style={{color: 'red'}}>{emailError}</Text>}
+        <View style={styles.textInputContain}>
+          <CustomTextInput
+            type="email"
+            value={Email}
+            error={emailError}
+            icon={Images.mail}
+            placeholder="Email Password"
+            onChangeText={text => handleTextChange(text, 'email')}
+          />
+          {emailError && <Text style={{color: 'red'}}>{emailError}</Text>}
 
-            <CustomTextInput
-              placeholder="Password"
-              value={Password}
-              onChangeText={text => handleTextChange(text, 'password')}
-              error={passwordError}
-              icon={Images.pass}
-              type="password"
+          <CustomTextInput
+            type="password"
+            value={Password}
+            icon={Images.pass}
+            error={passwordError}
+            placeholder="Password"
+            onChangeText={text => handleTextChange(text, 'password')}
+          />
 
-            />
-
-            {passwordError && (
-              <View>
-                <Text style={{color: 'red'}}>{passwordError}</Text>
-              </View>
-            )}
-          </View>
-
-          <View style={styles.forget}>
-            <TouchableOpacity
-              onPress={() => navigation.navigate(ScreenNames.Forgot)}>
-              <Text style={styles.forgetText}>Forgot Password?</Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.touchContain}>
-            <CustomButton
-              title="Primary"
-              onPress={handleSubmit}
-              disabled={!(Email && Password && !emailError && !passwordError)}
-            />
-          </View>
-
-          <Modal
-            animationType="fade"
-            transparent={true}
-            visible={modalVisible}
-            onRequestClose={() => setmodalVisible(false)}>
-            <View style={styles.modalBackground}>
-              <View style={styles.modalContainer}>
-                <View
-                  style={{
-                    height: 50,
-                    width: 50,
-                    borderRadius: 30,
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    backgroundColor: '#F79E98',
-                    opacity: 0.5,
-                  }}>
-                  <Image source={Images.errorLock} />
-                </View>
-                <Text style={styles.modalheading}>Account Locked</Text>
-                <View>
-                  <Text style={styles.modalText1}>
-                    Your account has been locked due to
-                  </Text>
-                  <Text style={styles.modalText1}>
-                    too many failed attempts. Please try
-                  </Text>
-                  <Text style={styles.modalText}>after some time.</Text>
-                </View>
-                <Pressable
-                  style={styles.modalButton}
-                  onPress={() => setmodalVisible(false)}>
-                  <Text style={styles.modalButtonText}>Okay</Text>
-                </Pressable>
-              </View>
+          {passwordError && (
+            <View>
+              <Text style={{color: 'red'}}>{passwordError}</Text>
             </View>
-          </Modal>
+          )}
+        </View>
+
+        <View style={styles.forget}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate(ScreenNames.Forgot)}>
+            <Text style={styles.forgetText}>Forgot Password?</Text>
+          </TouchableOpacity>
+        </View>
+        <View style={styles.touchContain}>
+          <CustomButton
+            title="Primary"
+            onPress={handleSubmit}
+            textStyle={styles.buttonText}
+            disabled={!(Email && Password && !emailError && !passwordError)}
+          />
+        </View>
+
+        <CustomModal
+          transparent
+          // customModalViewStyle={{backgroundColor: 'green'}}
+          modalVisible={modalVisible}
+          headText="Account Locked"
+          onRequestClose={() => setmodalVisible(false)}
+          TextContent="Your account has been locked due to too many failed attempts. Please try after some time."
+          Img={Images.errorLock}
+          handleModal={modalFalse}
+          Imgbg={false}
+        />
         {/* </View> */}
-        </Animated.View>
+      </Animated.View>
       {/* </KeyboardAvoidingView> */}
       <Toast
         config={{custom_error: ({text1}) => <CustomToast text1={text1} />}}

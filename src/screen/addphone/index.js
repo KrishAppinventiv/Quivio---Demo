@@ -51,6 +51,10 @@ const Addphone = () => {
     setCountry(country);
   };
 
+  const modalFalse = () => {
+    setmodalVisible(false)
+  }
+
   const handleModal = () => {
     setmodalVisible(false);
     navigation.navigate(ScreenNames.Sign);
@@ -148,7 +152,7 @@ const Addphone = () => {
             <View style={{flexDirection:'row'}}>
             <Pressable
               style={styles.modalButton1}
-              onPress={() => setmodalVisible(false)}>
+              onPress={modalFalse}>
               <Text style={styles.modalButtonText1}>No, Continue</Text>
             </Pressable>
 

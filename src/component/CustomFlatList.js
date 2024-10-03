@@ -1,17 +1,21 @@
 import {StyleSheet, Text, View, FlatList} from 'react-native';
 import React from 'react';
 
-const CustomFlatList = ({data, renderItem,type}) => {
+const CustomFlatList = props => {
+
+  const {
+    data, renderItem
+  } = props;
   return (
     <FlatList
       data={data}
       renderItem={renderItem}
-      horizontal={type == 'horizontal' ? true : false}
-      showsHorizontalScrollIndicator={false}
-      showsVerticalScrollIndicator={false}
+      // horizontal
+      // showsHorizontalScrollIndicator={false}
+      // showsVerticalScrollIndicator={false}
       keyExtractor={(item, index) => index.toString()}
       contentContainerStyle={styles.flatlist}
-      // {...props}
+      {...props}
     />
   );
 };

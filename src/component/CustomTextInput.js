@@ -47,7 +47,7 @@ const CustomTextInput = ({
 
   const placeholderStyle = {
     position: 'absolute',
-    left: 48,
+    left: 44,
     fontSize:14,
     top: animatedPlaceholder.interpolate({
       inputRange: [0, 1],
@@ -102,9 +102,11 @@ const styles = StyleSheet.create({
     marginTop: 20,
     borderRadius: 7,
     marginBottom: 2,
-    padding: 18,
+    padding: 10,
     backgroundColor: 'white',
     height: 66,
+    borderWidth:1,
+    borderColor:'#E7EBF3'
   },
   icon: {
     marginRight: 18,

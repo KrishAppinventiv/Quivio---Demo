@@ -6,7 +6,9 @@ import {
   TouchableOpacity,
   Image,
   TextInput,
-  KeyboardAvoidingView,Modal,Pressable
+  KeyboardAvoidingView,
+  Modal,
+  Pressable,
 } from 'react-native';
 import React, {useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
@@ -21,14 +23,13 @@ import styles from './styles';
 import Toast from 'react-native-toast-message';
 import CustomToast from '../../component/CustomToast';
 
-
 const Forgot = () => {
   const navigation = useNavigation();
 
   const [Email, SetEmail] = useState('');
   const [emailError, setEmailError] = useState('');
 
-  const [modalVisible,setmodalVisible] = useState(false);
+  const [modalVisible, setmodalVisible] = useState(false);
 
   const validateEmail = email => {
     if (!validator.isEmail(email)) {
@@ -61,31 +62,27 @@ const Forgot = () => {
     const isEmailValid = validateEmail(Email);
 
     if (!isEmailValid) {
-     
-
       return;
     } else {
       // navigation.reset({
       //   index: 0,
       //   routes: [{name: ScreenNames.Reset}],
       // });
-      if(Email!= 'Krish@gmail.com'){
+      if (Email != 'Krish@gmail.com') {
         Toast.show({
           text1: 'Email not found. Contact admin.',
           type: 'custom_error',
         });
-      }else{
-        setmodalVisible(true)
+      } else {
+        setmodalVisible(true);
       }
-      
     }
   };
 
-  const handleModal = () =>{
+  const handleModal = () => {
     setmodalVisible(false);
-    navigation.navigate(ScreenNames.Reset)
-
- }
+    navigation.navigate(ScreenNames.Reset);
+  };
   return (
     // <ScrollView style={styles.container}>
 
@@ -115,7 +112,6 @@ const Forgot = () => {
               error={emailError}
               icon={Images.mail}
               type="email"
-              
             />
 
             {emailError && (
@@ -126,27 +122,40 @@ const Forgot = () => {
           </View>
         </View>
         <View style={styles.touchContain}>
-          <CustomButton title="Send Link" onPress={handleSubmit} disabled={!(Email && !emailError)} />
+          <CustomButton
+            title="Send Link"
+            onPress={handleSubmit}
+            disabled={!(Email && !emailError)}
+          />
         </View>
 
         <Modal
-        animationType="fade"
+          animationType="fade"
           transparent={true}
           visible={modalVisible}
-          onRequestClose={() => setmodalVisible(false)}
-        >
+          onRequestClose={() => setmodalVisible(false)}>
           <View style={styles.modalBackground}>
             <View style={styles.modalContainer}>
-              <View style={{height:50,width:50,borderRadius:30,justifyContent:'center',alignItems:'center',backgroundColor:'#D3F7FF',opacity:0.5}}>
+              <View
+                style={{
+                  height: 50,
+                  width: 50,
+                  borderRadius: 30,
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  backgroundColor: '#D3F7FF',
+                  opacity: 0.5,
+                }}>
                 <Image source={Images.Link} />
-                </View>
+              </View>
               <Text style={styles.modalheading}>Link Sent !</Text>
-              <Text style={styles.modalText}>The link to reset your password has</Text>
-              <Text style={styles.modalText1}>been sent on your email address.</Text>
-              <Pressable
-                style={styles.modalButton}
-                onPress={handleModal}
-              >
+              <Text style={styles.modalText}>
+                The link to reset your password has
+              </Text>
+              <Text style={styles.modalText1}>
+                been sent on your email address.
+              </Text>
+              <Pressable style={styles.modalButton} onPress={handleModal}>
                 <Text style={styles.modalButtonText}>Reset Password</Text>
               </Pressable>
             </View>
@@ -161,5 +170,3 @@ const Forgot = () => {
 };
 
 export default Forgot;
-
-
