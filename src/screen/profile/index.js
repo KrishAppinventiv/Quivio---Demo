@@ -381,7 +381,7 @@ const Profile = () => {
           </View>
         </Modal>
       </SafeAreaView>
-    </ScrollView>
+    </ScrollView> //changes done
   );
 };
 
